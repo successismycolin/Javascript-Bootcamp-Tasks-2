@@ -16,8 +16,20 @@ const submittedStudents = document.getElementById("studentsListSection");
 let students = [];
 
 function addStudent() {
-    let name = nameInput.value.trim();
+    const name = nameInput.value.trim();
     let mark = markInput.value.trim();
+
+    if (!name || !mark) {
+        alert("Please make sure your text fields contain valid input.");
+        return;
+    }
+    
+    mark = Number.parseInt(mark);
+    
+    if (mark < 0 || mark > 100 || !Number.isInteger(mark)) {
+        alert("Please make sure your Student Mark is an integer value between 0 and 100.")
+        return;
+    }
 
     let student = {
         name: name,
