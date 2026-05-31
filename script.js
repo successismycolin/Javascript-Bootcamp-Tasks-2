@@ -15,6 +15,11 @@ const submittedStudents = document.getElementById("studentsListSection");
 
 let students = [];
 
+/**
+ * Adds a student's result, name and mark to the HTML document.
+ * @returns 
+ * 
+ */
 function addStudent() {
     const name = nameInput.value.trim();
     let mark = markInput.value.trim();
@@ -41,11 +46,20 @@ function addStudent() {
     students.push(student);
 
     displayResult(student.mark);
+
+    displayAllStudents();
 }
 
+/**
+ * Displays the result corresponding with a student's mark.
+ * - 0 - 49 => Fail 
+ * - 50 - 64 => Pass
+ * - 65 - 74 => Pass with Merit
+ * - 75 - 100 => Pass with Distinction
+ * @param {Number} mark 
+ */
 function displayResult(mark) {
     result.value = "";
-    mark = Number(mark);
     
     const studentResult = document.createElement("p");
     
@@ -73,6 +87,22 @@ function displayResult(mark) {
     }
 }
 
-submitBtn.addEventListener("click", addStudent);
+/** 
+ * Displays all the items currently present in the students list defined as a global variable. 
+ * @param none
+* */
+function displayAllStudents() {
+    // submittedStudents = outermost display element - <div>
+    submittedStudents.value = "";
+    // Creating a <ul> element inside submittedStudents <div>
+    const studentsList = document.createElement("ul");
+    
+    students.forEach((student) => {
+        studentsList.innerHTML = `<li>${student.name} - ${student.mark}</li>`;
+        // studentsList now contains a list item <li> representing each student's name and mark
+        // appending the <ul> element inside the <div> element
+        submittedStudents.appendChild(studentsList);
+    });
+}
 
-// function displayStudents() {}
+submitBtn.addEventListener("click", addStudent);
