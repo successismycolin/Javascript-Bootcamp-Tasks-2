@@ -24,6 +24,7 @@ function addStudent() {
     const name = nameInput.value.trim();
     let mark = markInput.value.trim();
 
+    // If either text field is empty 
     if (!name || !mark) {
         alert("Please make sure your text fields contain valid input.");
         return;
@@ -31,6 +32,7 @@ function addStudent() {
     
     mark = Number.parseInt(mark);
     
+    // If mark falls out of bounds or is not a number
     if (mark < 0 || mark > 100 || !Number.isInteger(mark)) {
         alert("Please make sure your Student Mark is an integer value between 0 and 100.")
         return;
@@ -89,11 +91,13 @@ function displayResult(mark) {
 function displayAllStudents() {
     // submittedStudents = outermost display element - <div>
     submittedStudents.value = "";
+
     // Creating a <ul> element inside submittedStudents <div>
     const studentsList = document.createElement("ul");
     
     students.forEach((student) => {
         studentsList.innerHTML = `<li>${student.name} - ${student.mark}</li>`;
+
         // studentsList now contains a list item <li> representing each student's name and mark
         // appending the <ul> element inside the <div> element
         submittedStudents.appendChild(studentsList);
