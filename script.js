@@ -10,8 +10,8 @@ const submitBtn = document.getElementById("submitBtn");
 // <div>
 const result = document.getElementById("studentResultSection");
 
-// <ul>
-const submittedStudents = document.getElementById("studentsList");
+// <div>
+const submittedStudents = document.getElementById("studentsListSection");
 
 let students = [];
 
@@ -24,15 +24,19 @@ function addStudent() {
         mark: mark
     };
 
+    result.replaceChildren();
+
     students.push(student);
+
+    displayResult(student.mark);
 }
 
 function displayResult(mark) {
     result.value = "";
     mark = Number(mark);
-
+    
     const studentResult = document.createElement("p");
-
+    
     switch (true) {
         case (mark <= 49): 
             studentResult.innerHTML = "Failed";
@@ -51,12 +55,12 @@ function displayResult(mark) {
             result.appendChild(studentResult);
             break;
         default:
-            studentResult.innerHTML("");
+            studentResult.innerHTML = "";
             result.appendChild(studentResult);
             break;
     }
 }
 
-submitBtn.addEventListener("click", displayResult("80"));
+submitBtn.addEventListener("click", addStudent);
 
-// function displayStudent() {}
+// function displayStudents() {}
