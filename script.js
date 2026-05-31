@@ -41,6 +41,7 @@ function addStudent() {
         mark: mark
     };
 
+    // Clear result div before populating it with a student's result
     result.replaceChildren();
 
     students.push(student);
@@ -54,36 +55,30 @@ function addStudent() {
  * Displays the result corresponding with a student's mark.
  * - 0 - 49 => Fail 
  * - 50 - 64 => Pass
- * - 65 - 74 => Pass with Merit
- * - 75 - 100 => Pass with Distinction
+ * - 65 - 79 => Pass with Merit
+ * - 80 - 100 => Pass with Distinction
  * @param {Number} mark 
  */
 function displayResult(mark) {
     result.value = "";
     
     const studentResult = document.createElement("p");
-    
-    switch (true) {
-        case (mark <= 49): 
-            studentResult.innerHTML = "Failed";
-            result.appendChild(studentResult);
-            break;
-        case (mark <= 64):
-            studentResult.innerHTML = "Passed";
-            result.appendChild(studentResult);
-            break;
-        case (mark <= 74):
-            studentResult.innerHTML = "Passed with Merit";
-            result.appendChild(studentResult);
-            break;
-        case (mark <= 100):
-            studentResult.innerHTML = "Passed with Distinction";
-            result.appendChild(studentResult);
-            break;
-        default:
-            studentResult.innerHTML = "";
-            result.appendChild(studentResult);
-            break;
+
+    if (mark <= 49) {
+        studentResult.innerHTML = "Failed";
+        result.appendChild(studentResult);
+    } else if (mark <= 64) {
+        studentResult.innerHTML = "Passed";
+        result.appendChild(studentResult);
+    } else if (mark <= 79) {
+        studentResult.innerHTML = "Passed with Merit";
+        result.appendChild(studentResult);
+    } else if (mark <= 100) {
+        studentResult.innerHTML = "Passed with Distinction";
+        result.appendChild(studentResult);
+    } else {
+        studentResult.innerHTML = "";
+        result.appendChild(studentResult);
     }
 }
 
